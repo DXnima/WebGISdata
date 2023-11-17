@@ -28,9 +28,9 @@ RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mbutil
 # 安装rio-rgbify
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple rio-rgbify
 
-# 安装ogr2pbf
+# 安装ogr2osm
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple lxml protobuf==3.20.1
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ogr2pbf
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ogr2osm
 
 # 源码编译安装tilemaker
 RUN mkdir -p /tmp/tilemaker
