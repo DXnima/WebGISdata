@@ -50,16 +50,16 @@
 ## 你将学会
 
 - [x] 矢量瓦片制作
-      - [x] 矢量数据转geojson
-      - [x] geojson转mbtiles矢量瓦片
+  - [x] 矢量数据转geojson
+  - [x] geojson转mbtiles矢量瓦片
 - [x] 栅格瓦片制作
-      - [x] 影像数据处理
-      - [x] 影像转mbtiles栅格瓦片
-      - [x] DEM影像数据处理
-      - [x] DEM影像转mbtiles栅格瓦片
+  - [x] 影像数据处理
+  - [x] 影像转mbtiles栅格瓦片
+  - [x] DEM影像数据处理
+  - [x] DEM影像转mbtiles栅格瓦片
 - [x] OSM矢量瓦片制作
-      - [x] OSM数据处理
-      - [x] OSM数据转openmaptiles规范的mbtiles矢量瓦片
+  - [x] OSM数据处理
+  - [x] OSM数据转openmaptiles规范的mbtiles矢量瓦片
 
 ## 如何开始
 
