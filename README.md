@@ -29,8 +29,6 @@
 
 <h4 align="center">WebGISdata 是</a> 使用开源GIS技术的地图瓦片生成解决方案. </h4>
 
-# WebGISdata
-
 构建[mbtiles格式](https://github.com/studentdsx/mbtiles-spec)的矢量瓦片、栅格瓦片、地形瓦片以及使用OSM数据构建瓦片. 在数据处理过程中,  最难的是安装各种环境, 现在整合了一个[Docker镜像](https://hub.docker.com/repository/docker/dxnima/webgisdata), 包括 [GDAL](https://gdal.org/) | [tippecanoe](https://github.com/mapbox/tippecanoe) | [mbutil](https://github.com/mapbox/mbutil) | [osmium](https://github.com/osmcode/osmium-tool) | [rio-rgbify](https://github.com/mapbox/rio-rgbify) |  [tilemaker](https://github.com/systemed/tilemaker) 这些环境.
 
 ## 项目地址
@@ -38,7 +36,7 @@
 - Gitee地址: https://gitee.com/dxnima/WebGISdata.git
 - Github地址: https://github.com/DXnima/WebGISdata.git
 
-## 技术
+## 开源技术
 
 |                      开源工具                      |                          说明                           |
 | :------------------------------------------------: | :-----------------------------------------------------: |
@@ -108,7 +106,7 @@ docker run -it --rm -v /待处理数据的路径:/data dxnima/webgisdata 你的�
 
 #### 进入容器使用命令
 
-进入容器后相当于一个linux系统, 开源正常使用linux系统命令进行操作.
+进入容器后相当于一个linux系统, 可以正常使用linux系统命令进行操作.
 
 ```shell
 # 进入容器内部
@@ -334,7 +332,7 @@ docker run -it --rm -v /待处理数据的路径:/data dxnima/webgisdata osmium 
 
 #### 3. OSM转mbtiles矢量瓦片
 
-使用OSM生成openmaptiles规范的矢量瓦片数据，下载`[config-openmaptiles.json](https://github.com/systemed/tilemaker/blob/master/resources/config-openmaptiles.json)`和`[process-openmaptiles.lua](https://github.com/systemed/tilemaker/blob/master/resources/process-openmaptiles.lua)`两个配置文件, 请前往下载.
+使用OSM生成openmaptiles规范的矢量瓦片数据，请前往下载 [config-openmaptiles.json](https://github.com/systemed/tilemaker/blob/master/resources/config-openmaptiles.json) 和 [process-openmaptiles.lua](https://github.com/systemed/tilemaker/blob/master/resources/process-openmaptiles.lua) 两个配置文件.
 
 
 使用tilemaker进行生成命令, 详细说明文档: [https://github.com/systemed/tilemaker](https://github.com/systemed/tilemaker)
