@@ -31,7 +31,7 @@
 
 # WebGISdata
 
-构建[mbtiles格式](https://github.com/studentdsx/mbtiles-spec)的矢量瓦片、栅格瓦片、地形瓦片以及使用OSM数据构建瓦片. 在数据处理过程中,  最难的是安装各种环境, 现在整合了一个Docker镜像整合了 [GDAL](https://gdal.org/) | [tippecanoe](https://github.com/mapbox/tippecanoe) | [mbutil](https://github.com/mapbox/mbutil) | [osmium](https://github.com/osmcode/osmium-tool) | [rio-rgbify](https://github.com/mapbox/rio-rgbify) |  [tilemaker](https://github.com/systemed/tilemaker) 这些环境.
+构建[mbtiles格式](https://github.com/studentdsx/mbtiles-spec)的矢量瓦片、栅格瓦片、地形瓦片以及使用OSM数据构建瓦片. 在数据处理过程中,  最难的是安装各种环境, 现在整合了一个[Docker镜像](https://hub.docker.com/repository/docker/dxnima/webgisdata), 包括 [GDAL](https://gdal.org/) | [tippecanoe](https://github.com/mapbox/tippecanoe) | [mbutil](https://github.com/mapbox/mbutil) | [osmium](https://github.com/osmcode/osmium-tool) | [rio-rgbify](https://github.com/mapbox/rio-rgbify) |  [tilemaker](https://github.com/systemed/tilemaker) 这些环境.
 
 ## 项目地址
 
