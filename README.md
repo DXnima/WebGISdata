@@ -69,8 +69,8 @@
 # 拉取镜像
 docker pull dxnima/webgisdata
 # 使用容器
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       你的命令
 ```
@@ -83,8 +83,8 @@ cd WebGISdata
 # 构建镜像
 docker build -f Dockerfile -t dxnima/webgisdata .
 # 使用容器
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       你的命令
 ```
@@ -107,8 +107,8 @@ docker run -it --rm -v \
 
 ```shell
 # 命令拼接使用容器
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       你的命令
 ```
@@ -137,8 +137,8 @@ root@f7865dcb49d0:/data# 你的命令
 1. 将shp文件的EPSG:4326转EPSG:3857命令如下:
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2ogr -s_srs EPSG:4326 -t_srs EPSG:3857 -f "ESRI Shapefile" /data/output.shp /data/input.shp
 ```
@@ -146,8 +146,8 @@ docker run -it --rm -v \
 2. 将geojson文件的EPSG:4326转EPSG:3857命令如下:
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2ogr -s_srs EPSG:4326 -t_srs EPSG:3857 -f "GeoJSON" /data/output.geojson /data/input.geojson
 ```
@@ -161,8 +161,8 @@ docker run -it --rm -v \
 1. 将有中文属性的shp转为geojson
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2ogr -lco encoding=UTF-8 -f "GeoJSON" /data/output.geojson /data/input.shp
 ```
@@ -170,8 +170,8 @@ docker run -it --rm -v \
 2. 将KML转为geojson
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2ogr -f "GeoJSON" /data/output.geojson /data/input.kml
 ```
@@ -179,8 +179,8 @@ docker run -it --rm -v \
 3. 将MapInfo转为geojson
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2ogr -f "GeoJSON" /data/output.geojson /data/input.tab
 ```
@@ -201,8 +201,8 @@ docker run -it --rm -v dxnima/webgisdata ogr2ogr -f "GeoJSON" tablename.geojson 
 1. 生成0~15级矢量瓦片命令
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       tippecanoe -f -z15 -Z0 -o /data/output.mbtiles /data/input.json
 ```
@@ -210,8 +210,8 @@ docker run -it --rm -v \
 2. 多文件生成矢量瓦片命令
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       sh -c 'find /data -type f \( -name "*.json" -o -name "*.geojson" \) -exec tippecanoe -f -z15 -Z0 -o /data/output.mbtiles {} +'
 ```
@@ -226,8 +226,8 @@ docker run -it --rm -v \
 将EPSG:4326坐标系的tif格式影像转为EPSG:3857坐标系的影像, 命令如下:
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdalwarp -s_srs "EPSG:4326" -t_srs "EPSG:3857" /data/input.tif /data/output.tif
 ```
@@ -241,8 +241,8 @@ docker run -it --rm -v \
 1. 例如将某影像转8bit命令
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdal_translate -ot Byte /data/input.tif /data/output.tif
 ```
@@ -250,8 +250,8 @@ docker run -it --rm -v \
 2. 例如转8bit并将像素转为0.1
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdal_translate -ot Byte -tr 0.1 0.1 /data/input.tif /data/output.tif
 ```
@@ -263,8 +263,8 @@ docker run -it --rm -v \
 MapBox支持的地形瓦片是**Terrain-RGB格式**, 其无法表示负值, 需要使用**gdalwarp**进一步处理: 
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdalwarp -t_srs "EPSG:3857" -dstnodata None -co TILED=YES -co COMPRESS=DEFLATE -co BIGTIFF=IF_NEEDED /data/input.tif /data/output.tif
 ```
@@ -274,8 +274,8 @@ docker run -it --rm -v \
 MapBox支持的地形是Terrain-RGB格式, 用3个byte通过rgb三通道来表示高程, 其转换公式为: `height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1)`, 使用**rio-rgbify**实现转换命令如下, 详细说明文档: [https://github.com/mapbox/rio-rgbify](https://github.com/mapbox/rio-rgbify) 
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       rio rgbify -b -10000 -i 0.1 /data/input.tif /data/output_rgb.tif
 ```
@@ -289,8 +289,8 @@ docker run -it --rm -v \
 
 - 影像转mbtiles, 此方法只会构建最大等级的mbtiles切片, 需要第二步向上构建金字塔
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdal_translate -of MBTiles /data/input.tif /data/output.mbtiles
 ```
@@ -300,8 +300,8 @@ docker run -it --rm -v \
 使用**gdaladdo**命令完成, 说明文档: [https://www.osgeo.cn/gdal/programs/gdaladdo.html](https://www.osgeo.cn/gdal/programs/gdaladdo.html)
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdaladdo -r nearest /data/output.mbtiles
 ```
@@ -309,8 +309,8 @@ docker run -it --rm -v \
 **提示**: gdal_translate还可以通过 `-co <NAME=VALUE>` 控制输出瓦片的格式, 等其他命令操作, 例如生成png8格式的mbtiles栅格瓦片, 命令如下: 
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdal_translate -of MBTiles -co "TILE_FORMAT =PNG8" /data/input.tif /data/output.mbtiles
 ```
@@ -326,8 +326,8 @@ docker run -it --rm -v \
 例如: 影像生成0~15级的切片命令如下: 
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       gdal2tiles.py -z 0-15 -r near --xyz /data/input.tif /data/outdir
 ```
@@ -351,8 +351,8 @@ docker run -it --rm -v \
 运行下面命令生成mbtiles: 
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       mb-util /data/outdir /data/output.mbtiles
 ```
@@ -374,8 +374,8 @@ OSM数据下载地址: [https://download.geofabrik.de/asia](https://download.geo
 转换input.shp为output.osm, 并定义图层为layerName, 且排除字段attribute1,attribute2:
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       ogr2osm input.shp -o output.osm -nln layerName -e attribute1,attribute2
 ```
@@ -385,10 +385,10 @@ docker run -it --rm -v \
 当并不想使用全球的OSM数据, 请使用**osmium**进行合并, 详细说明文档: [https://osmcode.org/osmium-tool/manual.html](https://osmcode.org/osmium-tool/manual.html)
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
-      osmium merge /data/china-latest.osm.pbf -o china.all.pbf
+      osmium merge /data/china-latest.osm.pbf /data/taiwan-latest.osm.pbf -o china.all.pbf
 ```
 
 3. 设置数据边界
@@ -396,8 +396,8 @@ docker run -it --rm -v \
 对OSM设置中国范围的bbox, 使用**osmium**进行处理:
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       osmium extract --bbox=73.41788,14.27437,134.8559,53.65559 --set-bounds --strategy=smart /data/china.all.pbf --output /data/china.pbf
 ```
@@ -409,8 +409,8 @@ docker run -it --rm -v \
 使用tilemaker进行生成命令, 详细说明文档: [https://github.com/systemed/tilemaker](https://github.com/systemed/tilemaker)
 
 ```shell
-docker run -it --rm -v \
-      /待处理数据的路径:/data \
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
       dxnima/webgisdata \
       tilemaker --store --input /data/china.pbf --output /data/china.mbtiles --config /data/config-openmaptiles.json --process /data/process-openmaptiles.lua
 ```
