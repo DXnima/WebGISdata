@@ -29,7 +29,7 @@
 
 <h4 align="center">WebGISdata 是</a> 使用开源GIS技术的地图瓦片生成解决方案. </h4>
 
-构建[mbtiles格式](https://github.com/studentdsx/mbtiles-spec)的矢量瓦片、栅格瓦片、地形瓦片以及使用OSM数据构建瓦片. 在数据处理过程中,  最难的是安装各种环境, 现在整合了一个[Docker镜像](https://hub.docker.com/repository/docker/dxnima/webgisdata), 包括 [GDAL](https://gdal.org/) | [tippecanoe](https://github.com/mapbox/tippecanoe) | [mbutil](https://github.com/mapbox/mbutil) | [osmium](https://github.com/osmcode/osmium-tool) | [rio-rgbify](https://github.com/mapbox/rio-rgbify) |  [tilemaker](https://github.com/systemed/tilemaker) 这些环境.
+构建[mbtiles格式](https://github.com/studentdsx/mbtiles-spec)的矢量瓦片、栅格瓦片、地形瓦片以及使用OSM数据构建瓦片. 在数据处理过程中,  最难的是安装各种环境, 现在整合了一个[Docker镜像](https://hub.docker.com/repository/docker/dxnima/webgisdata), 包括 [GDAL](https://gdal.org/) | [tippecanoe](https://github.com/mapbox/tippecanoe) | [mbutil](https://github.com/mapbox/mbutil) | [osmium](https://github.com/osmcode/osmium-tool) | [rio-rgbify](https://github.com/mapbox/rio-rgbify) | [dem2terrain](https://github.com/FreeGIS/dem2terrain) |  [tilemaker](https://github.com/systemed/tilemaker) 这些环境.
 
 ## 项目地址
 
@@ -45,6 +45,7 @@
 |     [mbutil](https://github.com/mapbox/mbutil)     |          用于导入和导出 MBTiles 格式的实用程序          |
 |  [osmium](https://github.com/osmcode/osmium-tool)  | 一个多用途的命令行工具, 用于处理基于OpenStreetMap的数据 |
 | [rio-rgbify](https://github.com/mapbox/rio-rgbify) |         将DEM地形影像转 Terrain-RGB 格式的影像          |
+| [dem2terrain](https://github.com/FreeGIS/dem2terrain) |         根据 DEM 数据生成地形切片工具, 支持 mapbox 和 terrarium 格式          |
 | [tilemaker](https://github.com/systemed/tilemaker) |  从OpenStreetMap制作openmaptiles规范的mbtiles矢量瓦片   |
 
 ## 你将学会
@@ -98,6 +99,7 @@ docker run -it --rm \
 | tippecanoe | 1.36.0 |
 |   mbutil   | 0.3.0  |
 | rio-rgbify | 1.3.9  |
+| dem2terrain | 2.1.0  |
 | tilemaker  | 2.4.0  |
 |  ogr2osm   | 1.2.0  |
 
@@ -279,6 +281,20 @@ docker run -it --rm \
       dxnima/webgisdata \
       rio rgbify -b -10000 -i 0.1 /data/input.tif /data/output_rgb.tif
 ```
+
+2. 转terrarium格式地形瓦片
+
+terrarium格式是tangram引擎的官方地形格式，[tangram](https://www.mapzen.com/products/tangram/)是另外一款开源的webgl二三维一体化的引擎, 使用**dem2terrain**实现, 转换命令如下, 详细说明文档: [https://github.com/FreeGIS/dem2terrain](https://github.com/FreeGIS/dem2terrain)
+
+例如: 将`input.tif`转换256大小、3857坐标系的terrarium格式的mbtiles瓦片
+
+```shell
+docker run -it --rm \
+      -v /待处理数据的路径:/data \
+      dxnima/webgisdata \
+      dem2terrain -z 4-15 -s 256 -e terrarium -i input.tif -o output.mbtiles -c 1 -g 3857
+```
+**提示**: dem2terrain也支持生成MapBox支持的Terrain-RGB格式地形瓦片
 
 #### 4. 影像切片
 
