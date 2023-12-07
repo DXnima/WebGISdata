@@ -268,7 +268,7 @@ MapBox支持的地形瓦片是**Terrain-RGB格式**, 其无法表示负值, 需�
 docker run -it --rm \
       -v /待处理数据的路径:/data \
       dxnima/webgisdata \
-      gdalwarp -t_srs "EPSG:3857" -dstnodata None -co TILED=YES -co COMPRESS=DEFLATE -co BIGTIFF=IF_NEEDED /data/input.tif /data/output.tif
+      gdalwarp -t_srs "EPSG:3857" -r cubic -dstnodata None -co TILED=YES -co COMPRESS=DEFLATE -co BIGTIFF=IF_NEEDED /data/input.tif /data/output.tif
 ```
 
 1. 转MaoBox格式地形瓦片
@@ -308,8 +308,10 @@ docker run -it --rm \
 docker run -it --rm \
       -v /待处理数据的路径:/data \
       dxnima/webgisdata \
-      gdal_translate -of MBTiles /data/input.tif /data/output.mbtiles
+      gdal_translate -of MBTiles -r nearest /data/input.tif /data/output.mbtiles
 ```
+
+**提示**: DEM生成切片时, `-r`重采样算法推荐使用`bilinear`双线性插值法或`cubic`双三次插值法
 
 - mbtiles向上构建金字塔
 
@@ -322,13 +324,13 @@ docker run -it --rm \
       gdaladdo -r nearest /data/output.mbtiles
 ```
 
-**提示**: gdal_translate还可以通过 `-co <NAME=VALUE>` 控制输出瓦片的格式, 等其他命令操作, 例如生成png8格式的mbtiles栅格瓦片, 命令如下: 
+**提示**: DEM生成切片时, `-r`重采样算法推荐使用`bilinear`双线性插值法或`cubic`双三次插值法; gdal_translate还可以通过 `-co <NAME=VALUE>` 控制输出瓦片的格式, 等其他命令操作, 例如生成png8格式的mbtiles栅格瓦片, 命令如下: 
 
 ```shell
 docker run -it --rm \
       -v /待处理数据的路径:/data \
       dxnima/webgisdata \
-      gdal_translate -of MBTiles -co "TILE_FORMAT =PNG8" /data/input.tif /data/output.mbtiles
+      gdal_translate -of MBTiles -co "TILE_FORMAT=PNG8" /data/input.tif /data/output.mbtiles
 ```
 
 2. 影像转切片碎片再转mbtiles
@@ -347,6 +349,8 @@ docker run -it --rm \
       dxnima/webgisdata \
       gdal2tiles.py -z 0-15 -r near --xyz /data/input.tif /data/outdir
 ```
+
+**提示**: DEM生成切片时, `-r`重采样算法推荐使用`bilinear`双线性插值法或`cubic`双三次插值法
 
 - 碎瓦片转mbtiles
 
